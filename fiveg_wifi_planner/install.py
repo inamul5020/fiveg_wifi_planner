@@ -1,8 +1,8 @@
 import frappe
-from frappe.utils import flt, now_datetime, getdate
+from frappe.utils import now_datetime, getdate
 
 # ----------------------
-# Ensure basic scaffolding
+# Base Setup (safe at install time)
 # ----------------------
 def _ensure_module():
     if not frappe.db.exists("Module Def", "Fiveg Wifi Planner"):
@@ -36,7 +36,7 @@ def _ensure_workspace():
 
 
 # ----------------------
-# Create Number Cards (AFTER doctypes exist)
+# Number Cards
 # ----------------------
 def _create_number_cards():
     def make(label, doctype, function="Sum", field=None, filters=None):
@@ -66,7 +66,7 @@ def _create_number_cards():
 
 
 # ----------------------
-# Insert Demo Data (AFTER doctypes exist)
+# Demo Data
 # ----------------------
 def _demo_data():
     required = ["Customer Department", "ABR Package", "Customer",
@@ -77,8 +77,10 @@ def _demo_data():
             return
 
     # Departments
-    dep_sales = frappe.get_doc({"doctype": "Customer Department", "department_name": "Sales"}).insert(ignore_permissions=True) if not frappe.db.exists("Customer Department", "Sales") else frappe.get_doc("Customer Department", "Sales")
-    dep_support = frappe.get_doc({"doctype": "Customer Department", "department_name": "Support"}).insert(ignore_permissions=True) if not frappe.db.exists("Customer Department", "Support") else frappe.get_doc("Customer Department", "Support")
+    if not frappe.db.exists("Customer Department", "Sales"):
+        frappe.get_doc({"doctype": "Customer Department", "department_name": "Sales"}).insert(ignore_permissions=True)
+    if not frappe.db.exists("Customer Department", "Support"):
+        frappe.get_doc({"doctype": "Customer Department", "department_name": "Support"}).insert(ignore_permissions=True)
 
     # Packages
     if not frappe.db.exists("ABR Package", "Basic 50Mbps"):
@@ -134,13 +136,20 @@ def _demo_data():
 
 
 # ----------------------
-# Final Install Hook
+# Hooks entry points
 # ----------------------
-def after_install():
+def basic_setup():
+    """Runs at install time (safe stuff only)."""
     frappe.clear_cache()
     _ensure_module()
     _ensure_roles()
     _ensure_workspace()
+    frappe.db.commit()
+
+
+def post_migrate_setup():
+    """Runs after migrate when all doctypes are present."""
+    frappe.clear_cache()
     _create_number_cards()
     _demo_data()
     frappe.db.commit()

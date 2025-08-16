@@ -5,8 +5,21 @@ app_description = "Payment tracking, company ledger, reconciliation and dashboar
 app_email = "dev@example.com"
 app_license = "MIT"
 
-after_install = "fiveg_wifi_planner.install.after_install"
+# ----------------------
+# Run only core scaffolding at install
+# ----------------------
+after_install = "fiveg_wifi_planner.install.basic_setup"
 
+# ----------------------
+# Run Number Cards + Demo Data safely AFTER migrations
+# ----------------------
+after_migrate = [
+    "fiveg_wifi_planner.install.post_migrate_setup"
+]
+
+# ----------------------
+# DocEvents (your controllers)
+# ----------------------
 doc_events = {
     "Customer Payment": {
         "validate": "fiveg_wifi_planner.controllers.customer_payment.validate_payment_permission",
@@ -22,5 +35,4 @@ doc_events = {
         "on_submit": "fiveg_wifi_planner.controllers.expense.on_submit_expense"
     }
 }
-
 scheduler_events = {"monthly": ["fiveg_wifi_planner.controllers.monthly.monthly_close"]}
