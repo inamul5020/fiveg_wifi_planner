@@ -1,5 +1,5 @@
 #!/bin/bash
-SITE=${1:-dev3.laksystem.xyz}
+SITE=${1:-dev.laksystem.xyz}
 CYAN="\033[0;36m"; GREEN="\033[0;32m"; YELLOW="\033[1;33m"; RED="\033[0;31m"; NC="\033[0m"
 echo -e "${CYAN}Installing fiveg_wifi_planner on ${SITE}...${NC}"
 
