@@ -1,0 +1,110 @@
+import frappe
+from frappe.utils import flt, now_datetime, getdate
+
+def _ensure_module():
+    if not frappe.db.exists("Module Def", "Fiveg Wifi Planner"):
+        frappe.get_doc({"doctype":"Module Def","module_name":"Fiveg Wifi Planner","app_name":"fiveg_wifi_planner"}).insert(ignore_permissions=True)
+
+def _ensure_roles():
+    for r in ["Manager","Staff"]:
+        if not frappe.db.exists("Role", r):
+            frappe.get_doc({"doctype":"Role","role_name": r}).insert(ignore_permissions=True)
+
+def _ensure_workspace():
+    if not frappe.db.exists("Workspace", "Fiveg Wifi Planner"):
+        frappe.get_doc({
+            "doctype": "Workspace",
+            "workspace_name": "Fiveg Wifi Planner",
+            "label": "Fiveg Wifi Planner",
+            "title": "Fiveg Wifi Planner",
+            "public": 1,
+            "module": "Fiveg Wifi Planner",
+            "content": "[]"
+        }).insert(ignore_permissions=True)
+
+def _create_number_cards():
+    def make(label, doctype, function="Sum", field=None, filters=None):
+        if frappe.db.exists("Number Card", label):
+            return
+        nd = {
+            "doctype":"Number Card",
+            "label": label,
+            "function": function,
+            "document_type": doctype,
+            "filters_json": frappe.as_json(filters or {}),
+            "is_public": 1
+        }
+        if field:
+            nd["aggregate_function_based_on"] = field
+        frappe.get_doc(nd).insert(ignore_permissions=True)
+
+    make("Pending Handover (QAR)","Customer Payment","Sum","amount",{"company_received":0})
+    make("Collected (Received) Cash (QAR)","Monthly Summary","Sum","received_cash",{})
+    make("Collected (Received) Bank (QAR)","Monthly Summary","Sum","received_bank",{})
+    make("Total Expense (QAR)","Monthly Summary","Sum","total_expense",{})
+    make("Net Profit (QAR)","Monthly Summary","Sum","net_profit",{})
+
+def _demo_data():
+    # Departments
+    dep_sales = frappe.get_doc({"doctype":"Customer Department","department_name":"Sales"}).insert(ignore_permissions=True) if not frappe.db.exists("Customer Department","Sales") else frappe.get_doc("Customer Department","Sales")
+    dep_support = frappe.get_doc({"doctype":"Customer Department","department_name":"Support"}).insert(ignore_permissions=True) if not frappe.db.exists("Customer Department","Support") else frappe.get_doc("Customer Department","Support")
+
+    # Packages
+    p1 = "Basic 50Mbps"
+    if not frappe.db.exists("ABR Package", p1):
+        frappe.get_doc({"doctype":"ABR Package","package_name":p1,"price":200.0,"speed":"50Mbps","validity_days":30}).insert(ignore_permissions=True)
+    p2 = "Pro 100Mbps"
+    if not frappe.db.exists("ABR Package", p2):
+        frappe.get_doc({"doctype":"ABR Package","package_name":p2,"price":300.0,"speed":"100Mbps","validity_days":30}).insert(ignore_permissions=True)
+
+    # Customers
+    c1 = "CUST-0001"
+    if not frappe.db.exists("Customer", c1):
+        frappe.get_doc({"doctype":"Customer","customer_id":c1,"customer_name":"Ali Hassan","department":"Sales","package":"Basic 50Mbps","balance_total":0}).insert(ignore_permissions=True)
+    c2 = "CUST-0002"
+    if not frappe.db.exists("Customer", c2):
+        frappe.get_doc({"doctype":"Customer","customer_id":c2,"customer_name":"Mohamed Kareem","department":"Support","package":"Pro 100Mbps","balance_total":0}).insert(ignore_permissions=True)
+
+    # One collected payment (cash) not yet handed-over
+    if not frappe.get_all("Customer Payment", filters={"customer":"CUST-0001"}, limit=1):
+        p = frappe.get_doc({
+            "doctype":"Customer Payment",
+            "customer":"CUST-0001",
+            "amount":500.0,
+            "payment_type":"Cash",
+            "payment_date": getdate(now_datetime()),
+            "collected_by": frappe.session.user,
+            "remarks":"Demo cash collection"
+        })
+        p.insert(ignore_permissions=True).submit()
+
+    # One submission that auto-approves and lands in ledger
+    if not frappe.get_all("Staff Payment Submission"):
+        cp = frappe.get_all("Customer Payment", filters={"company_received":0}, limit=1)
+        if cp:
+            sub = frappe.get_doc({
+                "doctype":"Staff Payment Submission",
+                "staff_user": frappe.session.user,
+                "submission_date": now_datetime(),
+                "payments":[{"doctype":"Staff Payment Submission Item","customer_payment": cp[0].name, "amount": 500.0}]
+            }).insert(ignore_permissions=True)
+            sub.submit()
+
+    # One expense (ISP)
+    if not frappe.get_all("Expense"):
+        e = frappe.get_doc({
+            "doctype":"Expense",
+            "expense_date": getdate(now_datetime()),
+            "expense_type":"ISP",
+            "amount":200.0,
+            "remarks":"Demo ISP fee"
+        }).insert(ignore_permissions=True)
+        e.submit()
+
+def after_install():
+    _ensure_module()
+    _ensure_roles()
+    _ensure_workspace()
+    _create_number_cards()
+    _demo_data()
+    frappe.db.commit()

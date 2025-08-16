@@ -1,0 +1,90 @@
+{
+  "doctype": "DocType",
+  "owner": "Administrator",
+  "name": "Monthly Summary",
+  "module": "Fiveg Wifi Planner",
+  "custom": 0,
+  "istable": 0,
+  "autoname": "field:month",
+  "editable_grid": 0,
+  "track_changes": 1,
+  "beta": 0,
+  "is_submittable": 0,
+  "fields": [
+    {
+      "fieldtype": "Data",
+      "fieldname": "month",
+      "label": "Month (YYYY-MM)",
+      "reqd": 1,
+      "unique": 1
+    },
+    {
+      "fieldtype": "Currency",
+      "fieldname": "collected_cash",
+      "label": "Collected Cash",
+      "options": "QAR"
+    },
+    {
+      "fieldtype": "Currency",
+      "fieldname": "collected_bank",
+      "label": "Collected Bank",
+      "options": "QAR"
+    },
+    {
+      "fieldtype": "Currency",
+      "fieldname": "received_cash",
+      "label": "Received Cash",
+      "options": "QAR"
+    },
+    {
+      "fieldtype": "Currency",
+      "fieldname": "received_bank",
+      "label": "Received Bank",
+      "options": "QAR"
+    },
+    {
+      "fieldtype": "Currency",
+      "fieldname": "total_expense",
+      "label": "Total Expense",
+      "options": "QAR"
+    },
+    {
+      "fieldtype": "Currency",
+      "fieldname": "net_profit",
+      "label": "Net Profit",
+      "options": "QAR"
+    }
+  ],
+  "permissions": [
+    {
+      "role": "Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "submit": 1,
+      "cancel": 1,
+      "amend": 1,
+      "delete": 1,
+      "print": 1,
+      "email": 1,
+      "report": 1,
+      "share": 1,
+      "export": 1
+    },
+    {
+      "role": "Staff",
+      "read": 1,
+      "write": 0,
+      "create": 0,
+      "submit": 0,
+      "cancel": 0,
+      "amend": 0,
+      "delete": 0,
+      "print": 1,
+      "email": 1,
+      "report": 1,
+      "share": 0,
+      "export": 0
+    }
+  ]
+}

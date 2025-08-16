@@ -1,0 +1,8 @@
+{
+  "doctype": "Report",
+  "report_name": "Company Ledger Report",
+  "ref_doctype": "Company Ledger",
+  "is_standard": "Yes",
+  "report_type": "Script Report",
+  "module": "Fiveg Wifi Planner"
+}

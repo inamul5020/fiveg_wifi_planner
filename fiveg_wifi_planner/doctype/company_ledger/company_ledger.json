@@ -1,0 +1,91 @@
+{
+  "doctype": "DocType",
+  "owner": "Administrator",
+  "name": "Company Ledger",
+  "module": "Fiveg Wifi Planner",
+  "custom": 0,
+  "istable": 0,
+  "autoname": "naming_series:CL-.####",
+  "editable_grid": 0,
+  "track_changes": 1,
+  "beta": 0,
+  "is_submittable": 0,
+  "fields": [
+    {
+      "fieldtype": "Datetime",
+      "fieldname": "posting_datetime",
+      "label": "Posting Datetime",
+      "reqd": 1
+    },
+    {
+      "fieldtype": "Select",
+      "fieldname": "entry_type",
+      "label": "Entry Type",
+      "options": "Income\\nExpense\\nAdjustment",
+      "reqd": 1
+    },
+    {
+      "fieldtype": "Link",
+      "fieldname": "reference_doctype",
+      "label": "Reference Doctype",
+      "options": "DocType"
+    },
+    {
+      "fieldtype": "Dynamic Link",
+      "fieldname": "reference_name",
+      "label": "Reference Name",
+      "options": "reference_doctype"
+    },
+    {
+      "fieldtype": "Currency",
+      "fieldname": "amount",
+      "label": "Amount",
+      "reqd": 1,
+      "options": "QAR"
+    },
+    {
+      "fieldtype": "Currency",
+      "fieldname": "balance_after",
+      "label": "Balance After",
+      "options": "QAR",
+      "read_only": 1
+    },
+    {
+      "fieldtype": "Small Text",
+      "fieldname": "remarks",
+      "label": "Remarks"
+    }
+  ],
+  "permissions": [
+    {
+      "role": "Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "submit": 1,
+      "cancel": 1,
+      "amend": 1,
+      "delete": 1,
+      "print": 1,
+      "email": 1,
+      "report": 1,
+      "share": 1,
+      "export": 1
+    },
+    {
+      "role": "Staff",
+      "read": 1,
+      "write": 0,
+      "create": 0,
+      "submit": 0,
+      "cancel": 0,
+      "amend": 0,
+      "delete": 0,
+      "print": 1,
+      "email": 1,
+      "report": 1,
+      "share": 0,
+      "export": 0
+    }
+  ]
+}

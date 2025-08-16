@@ -1,0 +1,1 @@
+__version__ = '0.2.1'\n__app_name__ = 'fiveg_wifi_planner'\n

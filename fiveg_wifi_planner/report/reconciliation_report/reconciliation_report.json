@@ -1,0 +1,8 @@
+{
+  "doctype": "Report",
+  "report_name": "Reconciliation Report",
+  "ref_doctype": "Customer Payment",
+  "is_standard": "Yes",
+  "report_type": "Script Report",
+  "module": "Fiveg Wifi Planner"
+}

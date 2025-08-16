@@ -1,0 +1,71 @@
+{
+  "doctype": "DocType",
+  "owner": "Administrator",
+  "name": "ABR Package",
+  "module": "Fiveg Wifi Planner",
+  "custom": 0,
+  "istable": 0,
+  "autoname": null,
+  "editable_grid": 0,
+  "track_changes": 1,
+  "beta": 0,
+  "is_submittable": 0,
+  "fields": [
+    {
+      "fieldtype": "Data",
+      "fieldname": "package_name",
+      "label": "Package Name",
+      "reqd": 1,
+      "unique": 1
+    },
+    {
+      "fieldtype": "Currency",
+      "fieldname": "price",
+      "label": "Price",
+      "reqd": 1,
+      "options": "QAR"
+    },
+    {
+      "fieldtype": "Data",
+      "fieldname": "speed",
+      "label": "Speed"
+    },
+    {
+      "fieldtype": "Int",
+      "fieldname": "validity_days",
+      "label": "Validity (Days)"
+    }
+  ],
+  "permissions": [
+    {
+      "role": "Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "submit": 1,
+      "cancel": 1,
+      "amend": 1,
+      "delete": 1,
+      "print": 1,
+      "email": 1,
+      "report": 1,
+      "share": 1,
+      "export": 1
+    },
+    {
+      "role": "Staff",
+      "read": 1,
+      "write": 0,
+      "create": 1,
+      "submit": 1,
+      "cancel": 0,
+      "amend": 0,
+      "delete": 0,
+      "print": 1,
+      "email": 1,
+      "report": 1,
+      "share": 1,
+      "export": 1
+    }
+  ]
+}

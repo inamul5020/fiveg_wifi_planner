@@ -1,0 +1,80 @@
+{
+  "doctype": "DocType",
+  "owner": "Administrator",
+  "name": "Voucher",
+  "module": "Fiveg Wifi Planner",
+  "custom": 0,
+  "istable": 0,
+  "autoname": "field:voucher_code",
+  "editable_grid": 0,
+  "track_changes": 1,
+  "beta": 0,
+  "is_submittable": 0,
+  "fields": [
+    {
+      "fieldtype": "Data",
+      "fieldname": "voucher_code",
+      "label": "Voucher Code",
+      "reqd": 1,
+      "unique": 1
+    },
+    {
+      "fieldtype": "Currency",
+      "fieldname": "amount",
+      "label": "Amount",
+      "reqd": 1,
+      "options": "QAR"
+    },
+    {
+      "fieldtype": "Link",
+      "fieldname": "customer",
+      "label": "Customer",
+      "options": "Customer"
+    },
+    {
+      "fieldtype": "Select",
+      "fieldname": "status",
+      "label": "Status",
+      "options": "Available\\nAssigned\\nRedeemed\\nExpired",
+      "default": "Available"
+    },
+    {
+      "fieldtype": "Check",
+      "fieldname": "is_assigned",
+      "label": "Is Assigned",
+      "default": 0
+    }
+  ],
+  "permissions": [
+    {
+      "role": "Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "submit": 1,
+      "cancel": 1,
+      "amend": 1,
+      "delete": 1,
+      "print": 1,
+      "email": 1,
+      "report": 1,
+      "share": 1,
+      "export": 1
+    },
+    {
+      "role": "Staff",
+      "read": 1,
+      "write": 0,
+      "create": 1,
+      "submit": 1,
+      "cancel": 0,
+      "amend": 0,
+      "delete": 0,
+      "print": 1,
+      "email": 1,
+      "report": 1,
+      "share": 1,
+      "export": 1
+    }
+  ]
+}

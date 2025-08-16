@@ -1,0 +1,106 @@
+{
+  "doctype": "DocType",
+  "owner": "Administrator",
+  "name": "Customer Payment",
+  "module": "Fiveg Wifi Planner",
+  "custom": 0,
+  "istable": 0,
+  "autoname": null,
+  "editable_grid": 0,
+  "track_changes": 1,
+  "beta": 0,
+  "is_submittable": 1,
+  "fields": [
+    {
+      "fieldtype": "Link",
+      "fieldname": "customer",
+      "label": "Customer",
+      "options": "Customer",
+      "reqd": 1
+    },
+    {
+      "fieldtype": "Currency",
+      "fieldname": "amount",
+      "label": "Amount",
+      "reqd": 1,
+      "options": "QAR"
+    },
+    {
+      "fieldtype": "Select",
+      "fieldname": "payment_type",
+      "label": "Payment Type",
+      "options": "Cash\\nBank",
+      "reqd": 1
+    },
+    {
+      "fieldtype": "Date",
+      "fieldname": "payment_date",
+      "label": "Payment Date",
+      "reqd": 1
+    },
+    {
+      "fieldtype": "Link",
+      "fieldname": "collected_by",
+      "label": "Collected By",
+      "options": "User"
+    },
+    {
+      "fieldtype": "Check",
+      "fieldname": "company_received",
+      "label": "Company Received",
+      "default": 0,
+      "read_only": 1
+    },
+    {
+      "fieldtype": "Check",
+      "fieldname": "is_handover_submitted",
+      "label": "Handover Submitted",
+      "default": 0,
+      "read_only": 1
+    },
+    {
+      "fieldtype": "Link",
+      "fieldname": "handover_submission",
+      "label": "Handover Submission",
+      "options": "Staff Payment Submission",
+      "read_only": 1
+    },
+    {
+      "fieldtype": "Small Text",
+      "fieldname": "remarks",
+      "label": "Remarks"
+    }
+  ],
+  "permissions": [
+    {
+      "role": "Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "submit": 1,
+      "cancel": 1,
+      "amend": 1,
+      "delete": 1,
+      "print": 1,
+      "email": 1,
+      "report": 1,
+      "share": 1,
+      "export": 1
+    },
+    {
+      "role": "Staff",
+      "read": 1,
+      "write": 0,
+      "create": 1,
+      "submit": 1,
+      "cancel": 0,
+      "amend": 0,
+      "delete": 0,
+      "print": 1,
+      "email": 1,
+      "report": 1,
+      "share": 0,
+      "export": 0
+    }
+  ]
+}

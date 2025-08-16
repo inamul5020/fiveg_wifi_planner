@@ -1,0 +1,94 @@
+{
+  "doctype": "DocType",
+  "owner": "Administrator",
+  "name": "Staff Payment Submission",
+  "module": "Fiveg Wifi Planner",
+  "custom": 0,
+  "istable": 0,
+  "autoname": null,
+  "editable_grid": 0,
+  "track_changes": 1,
+  "beta": 0,
+  "is_submittable": 1,
+  "fields": [
+    {
+      "fieldtype": "Link",
+      "fieldname": "staff_user",
+      "label": "Staff User",
+      "options": "User",
+      "reqd": 1
+    },
+    {
+      "fieldtype": "Datetime",
+      "fieldname": "submission_date",
+      "label": "Submission Date",
+      "reqd": 1
+    },
+    {
+      "fieldtype": "Table",
+      "fieldname": "payments",
+      "label": "Payments",
+      "options": "Staff Payment Submission Item"
+    },
+    {
+      "fieldtype": "Currency",
+      "fieldname": "total_amount",
+      "label": "Total Amount",
+      "options": "QAR",
+      "read_only": 1
+    },
+    {
+      "fieldtype": "Select",
+      "fieldname": "status",
+      "label": "Status",
+      "options": "Pending\\nApproved\\nRejected",
+      "default": "Pending",
+      "read_only": 1
+    },
+    {
+      "fieldtype": "Link",
+      "fieldname": "approved_by",
+      "label": "Approved By",
+      "options": "User",
+      "read_only": 1
+    },
+    {
+      "fieldtype": "Datetime",
+      "fieldname": "approved_on",
+      "label": "Approved On",
+      "read_only": 1
+    }
+  ],
+  "permissions": [
+    {
+      "role": "Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "submit": 1,
+      "cancel": 1,
+      "amend": 1,
+      "delete": 1,
+      "print": 1,
+      "email": 1,
+      "report": 1,
+      "share": 1,
+      "export": 1
+    },
+    {
+      "role": "Staff",
+      "read": 1,
+      "write": 0,
+      "create": 1,
+      "submit": 1,
+      "cancel": 0,
+      "amend": 0,
+      "delete": 0,
+      "print": 1,
+      "email": 1,
+      "report": 1,
+      "share": 0,
+      "export": 0
+    }
+  ]
+}

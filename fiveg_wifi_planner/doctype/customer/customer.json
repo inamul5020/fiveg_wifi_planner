@@ -1,0 +1,79 @@
+{
+  "doctype": "DocType",
+  "owner": "Administrator",
+  "name": "Customer",
+  "module": "Fiveg Wifi Planner",
+  "custom": 0,
+  "istable": 0,
+  "autoname": "field:customer_id",
+  "editable_grid": 0,
+  "track_changes": 1,
+  "beta": 0,
+  "is_submittable": 0,
+  "fields": [
+    {
+      "fieldtype": "Data",
+      "fieldname": "customer_id",
+      "label": "Customer ID",
+      "reqd": 1,
+      "unique": 1
+    },
+    {
+      "fieldtype": "Data",
+      "fieldname": "customer_name",
+      "label": "Customer Name",
+      "reqd": 1
+    },
+    {
+      "fieldtype": "Link",
+      "fieldname": "department",
+      "label": "Department",
+      "options": "Customer Department"
+    },
+    {
+      "fieldtype": "Link",
+      "fieldname": "package",
+      "label": "Package",
+      "options": "ABR Package"
+    },
+    {
+      "fieldtype": "Currency",
+      "fieldname": "balance_total",
+      "label": "Balance Total",
+      "options": "QAR",
+      "default": 0
+    }
+  ],
+  "permissions": [
+    {
+      "role": "Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "submit": 1,
+      "cancel": 1,
+      "amend": 1,
+      "delete": 1,
+      "print": 1,
+      "email": 1,
+      "report": 1,
+      "share": 1,
+      "export": 1
+    },
+    {
+      "role": "Staff",
+      "read": 1,
+      "write": 0,
+      "create": 1,
+      "submit": 1,
+      "cancel": 0,
+      "amend": 0,
+      "delete": 0,
+      "print": 1,
+      "email": 1,
+      "report": 1,
+      "share": 1,
+      "export": 1
+    }
+  ]
+}
