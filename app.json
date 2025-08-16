@@ -1,0 +1,10 @@
+{
+  "app_name": "fiveg_wifi_planner",
+  "app_title": "5G Wifi Planner",
+  "app_publisher": "You",
+  "app_description": "Payment tracking, company ledger, reconciliation and dashboard",
+  "app_icon": "octicon octicon-device-mobile",
+  "app_color": "blue",
+  "app_email": "dev@example.com",
+  "app_license": "MIT"
+}
