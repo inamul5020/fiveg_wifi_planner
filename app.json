@@ -5,8 +5,6 @@
   "app_description": "Payment tracking, company ledger, reconciliation and dashboard for 5G Wifi Planner",
   "app_email": "dev@example.com",
   "app_license": "MIT",
-  "version": "0.2.1",
-  "modules": [
-    "Fiveg Wifi Planner"
-  ]
+  "app_version": "0.0.1",
+  "hide_in_installer": 0
 }
